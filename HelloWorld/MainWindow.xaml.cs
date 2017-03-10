@@ -24,5 +24,42 @@ namespace HelloWorld
         {
             InitializeComponent();
         }
+
+        private void uxSubmit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Submitting Password: " + uxPassword.Text);
+        }
+
+        public bool Login
+        {
+            get
+            {
+                return (uxName.Text.Length > 0 && uxPassword.Text.Length > 0);
+            }
+        }
+
+        private void uxName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Login)
+            {
+                uxSubmit.IsEnabled = true;
+            }
+            else
+            {
+                uxSubmit.IsEnabled = false;
+            }
+        }
+
+        private void uxPassword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Login)
+            {
+                uxSubmit.IsEnabled = true;
+            }
+            else
+            {
+                uxSubmit.IsEnabled = false;
+            }
+        }
     }
 }
