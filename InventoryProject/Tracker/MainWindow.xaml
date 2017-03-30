@@ -1,0 +1,74 @@
+﻿<Window x:Class="Tracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tracker"
+        mc:Ignorable="d"
+        Title="Entertainment Progress Tracker" Height="350" Width="525">
+    <StackPanel Orientation="Vertical">
+        <Menu>
+            <MenuItem Header="_File">
+                <MenuItem x:Name="uxFileNew" Header="_New" Click="uxFileNew_Click"/>
+                <MenuItem x:Name="uxContextFileChange" Header="_Modify" Click="uxContextFileChange_Click" Loaded="uxContextFileChange_Loaded"/>
+                <MenuItem x:Name="uxContextFileDelete" Header="_Delete" Click="uxContextFileDelete_Click" Loaded="uxContextFileDelete_Loaded"/>
+                <MenuItem x:Name="uxFileQuit" Header="_Quit" Click="uxFileQuit_Click"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel x:Name="uxContainer">
+            <ListView x:Name="uxList" SelectionChanged="uxList_SelectionChanged" MouseDoubleClick="uxList_MouseDoubleClick">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="uxFileChange" Header="_Modify" Click="uxContextFileChange_Click" Loaded="uxContextFileChange_Loaded"/>
+                        <MenuItem x:Name="uxFileDelete" Header="_Delete" Click="uxContextFileDelete_Click" Loaded="uxContextFileDelete_Loaded"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="Auto">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Name" Click="GridViewColumnHeader_Click">Name</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Type}"  Width="Auto">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Type" Click="GridViewColumnHeader_Click">Type</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Genre}"  Width="Auto">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Genre" Click="GridViewColumnHeader_Click">Genre</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Current}"  Width="Auto">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Current" Click="GridViewColumnHeader_Click">Current Progress</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Header="+" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="+" Click="Button_Click" CommandParameter="{Binding}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Total}"  Width="Auto">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Tag="Total" Click="GridViewColumnHeader_Click">Total Releases</GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="uxStatus"></TextBlock>
+            </StatusBarItem>
+            <Separator />
+            <StatusBarItem>
+                <ProgressBar x:Name="uxProgressBar" Visibility="Hidden"  Width="90" Height="16"></ProgressBar>
+            </StatusBarItem>
+        </StatusBar>
+    </StackPanel>
+</Window>
